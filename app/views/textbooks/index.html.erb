@@ -3,7 +3,16 @@
 <h1> Homepage </h1>
 <section>
 <% @subject.each do |subject| %>
-<p> <%= subject.name %> </p>
+    <%= link_to(subject) do %>
+        <p> <%= subject.name %> </p>
+        <% end %>
+<% end %>
+
+
+<% @textbook.each do |textbook| %>
+    <%= link_to(textbook) do %>
+        <p> <%= textbook.name %> </p>
+        <% end %>
 <% end %>
 </section>
 </body>

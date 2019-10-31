@@ -33,8 +33,13 @@ if User.count == 0
     puts "created #{usere}"
     end
 end
-
-# making textbook data for database
+# variable for condition of made textbook
+quality = [
+    "Like New",
+    "Good",
+    "Poor quality"
+]
+# making textbook data for database, with a limit of 100 for the sake of test data
 unless Textbook.count == 100
     for i in 1..20
         b = rand(1..User.all.count)
@@ -47,7 +52,7 @@ unless Textbook.count == 100
             author: Faker::Book.author,
             ISBN: Faker::Code.isbn,
             # ISBN: rand(1..10000000),
-            condition: "good",
+            condition: quality.sample,
             price: rand(20..2000),
             retail_price: rand(50..5000),
             user_id: userx

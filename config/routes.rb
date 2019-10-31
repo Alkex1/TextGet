@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get "/", to: "pages#home", as: "root"
   get "/textbooks", to: "textbooks#index", as: "textbooks"
   post "/textbooks", to: "textbooks#create"
+  get "/subjects/:id", to: "subjects#show", as: "subject"
   get "/textbooks/new", to: "textbooks#new", as: "new_textbook"
   get "/textbooks/:id", to: "textbooks#show", as: "textbook"
   patch "/textbooks/:id", to: "textbooks#update"

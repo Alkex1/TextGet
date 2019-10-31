@@ -3,11 +3,21 @@ class TextbooksController < ApplicationController
         
     def index
        @textbook = Textbook.all
-       @subject = Subject.all 
+       @subject = Subject.all
+    #    @subtext = Subject.textbooks.all
+    #    @subjectname = Subject.find(1)
+
+
     end
 
     def show
+        @textbook = Textbook.find(params[:id])
+        # @subject = Subject.find(params[:id])
+    end
 
+    def showsubject
+        @subject = Subject.all
+        @showsubject = Subject.find(1)
     end
 
     def create
