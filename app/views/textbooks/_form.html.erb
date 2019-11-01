@@ -1,0 +1,34 @@
+<% if textbook.errors.any? %>
+    <% for error in textbook.errors.full_messages %>
+    <p><%= error %></p>
+    <% end %>
+<% end %>
+
+<%= form_with model: textbook, local: true do |form| %>
+<div>
+        <%= form.label :name %>
+        <%= form.text_field :name %>
+    </div>
+    <div>
+        <%= form.label :description %>
+        <%= form.text_area :description %>
+    </div>
+    <div>
+        <%= form.label :price, "Price (in cents)" %>
+        <%= form.number_field :price %>
+    </div>
+    <div>
+        <%= form.label :retail_price, "Retail Price" %>
+        <%= form.number.field :retail_price %>
+    </div>
+    <div>
+        <%= form.label :pic %>
+        <%= form.file_field :pic, accept: "image/png,image/gif,image/jpg,image/jpeg" %>
+    </div>
+
+    <div>
+        <%#= form.collection_check_boxes :subject_ids, subject, :id, :name %>
+    </div>
+    <%= form.submit (textbook.id ? "Edit Textbook Listing" : "Create Textbook Listing") %>
+
+<% end %>

@@ -2,6 +2,9 @@
 
 <h1> Homepage </h1>
 <section>
+<form action="<%= textbooks_path %>" method="GET">
+        <input type="search" name="search" />
+    </form>
 <% @subject.each do |subject| %>
     <%= link_to(subject) do %>
         <p> <%= subject.name %> </p>
