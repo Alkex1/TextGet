@@ -4,11 +4,21 @@
     <% end %>
 <% end %>
 
-<%= form_with model: textbook, local: true do |form| %>
-<div>
+<%= form_with model: @textbook, local: true do |form| %>
+    <div>
         <%= form.label :name %>
         <%= form.text_field :name %>
     </div>
+    <div>
+        <%= form.label :author %>
+        <%= form.text_field :author %>
+    </div>
+
+    <div>
+        <%= form.label :release_date %>
+        <%= form.date_field :release_date %>
+    </div>
+
     <div>
         <%= form.label :description %>
         <%= form.text_area :description %>
@@ -19,7 +29,7 @@
     </div>
     <div>
         <%= form.label :retail_price, "Retail Price" %>
-        <%= form.number.field :retail_price %>
+        <%= form.number_field :retail_price %>
     </div>
     <div>
         <%= form.label :pic %>
@@ -27,8 +37,8 @@
     </div>
 
     <div>
-        <%#= form.collection_check_boxes :subject_ids, subject, :id, :name %>
-    </div>
+    <%#= form.collection_check_boxes :subject_ids, subject, :id, :name %>
+</div>
     <%= form.submit (textbook.id ? "Edit Textbook Listing" : "Create Textbook Listing") %>
 
 <% end %>

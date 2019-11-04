@@ -1,5 +1,6 @@
 class TextbooksController < ApplicationController
     before_action :authenticate_user!
+
         
     def index
         @subject = Subject.all
@@ -19,7 +20,15 @@ class TextbooksController < ApplicationController
     end
 
     def create
-
+        # allows the user to add the name, author, release date, description, price, r-price and a picture if they choose.
+        whitelisted_params = params.require(:textbook).permit(:name, :author, :release_date, :description, :price, :retail_price, :pic)
+        @textbook = current_user.textbooks.create(textbook_params)
+        # if there are any errors, goes back to the new page in view
+        if @textbook.errors.any?
+            render "new"
+        else
+            redirect_to textbooks_path(@textbook)
+        end
     end
 
     def new
@@ -27,10 +36,21 @@ class TextbooksController < ApplicationController
     end
 
     def update
-
+        if @textbook.errors.any?
+            @subject = Subject.all
+            render "new"
+        else
+            redirect_to milkshake_path(@milkshake)
+        end
     end
 
     def edit
-
+        # @textbook = Texbook.all
     end
+end
+
+private
+
+def textbook_params
+    params.require(:textbook).permit(:name, :author, :release_date, :description, :price, :retail_price, :pic)
 end
