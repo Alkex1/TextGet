@@ -1,3 +1,4 @@
 <h1> <%= @txtname %> </h1>
-<h2> <%= @subject %> </h2>
+<h2> <%= @subjects[0] %> </h2>
 <%= @textbook.to_json %>
+<p> $<%= @textbook.price/100.0 %></p>

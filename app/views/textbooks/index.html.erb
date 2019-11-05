@@ -18,6 +18,7 @@
 
 
 <div class="navdiv">
+<h3>Common Subjects: </h3>
 <% @subject.each do |subject| %>
     <%= link_to(subject) do %>
         <p> <%= subject.name %> </p>
@@ -25,18 +26,20 @@
 <% end %>
 </div>
 
-<div class="divi">
+
 <% @textbook.each do |textbook| %>
+<div class="divi">
     <%= link_to(textbook) do %>
         <p> <%= textbook.name %> </p>
         <% end %>
         <% if textbook.price != nil %>
-        <p>$<%= textbook.price %> </p>
+        <p>$<%= textbook.price / 100.0 %> </p>
         <% else %>
         <p>price n/a</p>
         <% end %>
-<% end %>
 </div>
+
+<% end %>
 
 
 </section>

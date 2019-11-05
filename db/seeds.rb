@@ -63,9 +63,16 @@ unless Textbook.count == 100
 end
 
 # associating random Textbooks with random subjects for database
-for i in 1..Textbook.count do
-    x = rand(1..Textbook.count)
-    y = rand(1..Subject.count)
+# for i in 1..Textbook.count do
+#     x = rand(1..Textbook.count)
+#     y = rand(1..Subject.count)
 
-    TextbooksSubject.create(textbook_id: x, subject_id: y)
+#     TextbooksSubject.create(textbook_id: x, subject_id: y)
+# end
+
+subject_ids = Subject.pluck(:id)
+textbook_ids = Textbook.pluck(:id)
+
+for textbook_id in textbook_ids
+    TextbooksSubject.create(textbook_id: textbook_id, subject_id: subject_ids.sample)
 end

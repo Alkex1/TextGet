@@ -1,2 +1,17 @@
-<%= @subject.textbooks.to_json %>
+<%= render "/textbooks/nav_bar", textbook: @textbook %>
+<h1>Currently available Textbooks in: </h1>
+<h2><%= @subject.name %></h2>
+
+<% @textbooks.each do |textbook| %>
+    <%= link_to(textbook) do %>
+        <div>
+        <p> <%= textbook.name %> </p>
+        <% end %>
+        <% if textbook.price != nil %>
+        <p>$<%= textbook.price / 100.0 %> </p>
+        <% else %>
+        <p>price n/a</p>
+        </div>
+        <% end %>
+<% end %>
 

@@ -4,7 +4,6 @@ class TextbooksController < ApplicationController
         
     def index
         @subject = Subject.all
-
         if params[:search]
             @textbook = Textbook.where("name LIKE ?", "%#{params[:search]}%")
         else
@@ -19,9 +18,10 @@ class TextbooksController < ApplicationController
 
     def show
         @textbook = Textbook.find(params[:id])
-        @txtname = Textbook.find(params[:id]).name
+        @txtname = @textbook.name
         # retrieves all of the subject names for given textbook in an array.
-        @subject = Textbook.find(params[:id]).subjects.pluck(:name)
+        # @subjects = Subject.all
+        @subjects = @textbook.subjects.pluck(:name)
     end
 
     def create
@@ -45,12 +45,23 @@ class TextbooksController < ApplicationController
             @subject = Subject.all
             render "new"
         else
-            redirect_to milkshake_path(@milkshake)
+            redirect_to textbooks_path(@textbook)
         end
+
+        # @textbook = textbook.find(params[:id])
+        # @textbook.update(textbook: params[name of table][:name of thing to be changed])
+        # redirect to textbook_path
     end
 
     def edit
-        # @textbook = Texbook.all
+        # @textbook = Texbook.find(params[:id])
+    end
+
+    def destroy
+
+        id = params[:id]
+        @textbook = Textbook.find(params[:id].destroy)
+        redirect_to textbook_path
     end
 end
 
