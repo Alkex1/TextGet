@@ -1,10 +1,19 @@
 <body style="background-color:lightblue">
 
-<h1> Homepage </h1>
+<h1> Index </h1>
 <section>
-<form action="<%= textbooks_path %>" method="GET">
+
+<% if false %> <form action="<%= textbooks_path %>" method="GET">
         <input type="search" name="search" />
     </form>
+    <% end %>
+
+<%= form_with url: textbooks_path, method: "get", local: true do |form| %>
+	<%= form.label :search %>
+	<%= form.text_field :search %>
+	<%= form.submit "Search" %>
+<% end %>
+
 <% @subject.each do |subject| %>
     <%= link_to(subject) do %>
         <p> <%= subject.name %> </p>
@@ -17,5 +26,8 @@
         <p> <%= textbook.name %> </p>
         <% end %>
 <% end %>
+
+
+
 </section>
 </body>

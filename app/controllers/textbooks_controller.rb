@@ -5,11 +5,16 @@ class TextbooksController < ApplicationController
     def index
         @subject = Subject.all
 
-        if params[:search] && !params[:search].empty?
-            @textbook = Textbook.where(name: params[:search])
+        if params[:search]
+            @textbook = Textbook.where("name LIKE ?", "%#{params[:search]}%")
         else
             @textbook = Textbook.all
-        end
+        end    
+        # if params[:search] && !params[:search].empty?
+        #     @textbook = Textbook.where(name: params[:search])
+        # else
+        #     @textbook = Textbook.all
+        # end
     end
 
     def show
