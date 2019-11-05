@@ -1,0 +1,22 @@
+body {
+    background-color: lightblue;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.navdiv {
+    width: 40%;
+    display: inherit;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.divi {
+    display: inherit;
+    flex-direction: column;
+    margin-left: 5vw;
+}

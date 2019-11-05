@@ -1,6 +1,13 @@
 <body style="background-color:lightblue">
+<%= render "nav_bar", textbook: @textbook %>
 
 <h1> Index </h1>
+<%= form_with url: textbooks_path, method: "get", local: true do |form| %>
+	<%= form.label :search %>
+	<%= form.text_field :search %>
+	<%= form.submit "Search" %>
+<% end %>
+
 <section>
 
 <% if false %> <form action="<%= textbooks_path %>" method="GET">
@@ -8,25 +15,28 @@
     </form>
     <% end %>
 
-<%= form_with url: textbooks_path, method: "get", local: true do |form| %>
-	<%= form.label :search %>
-	<%= form.text_field :search %>
-	<%= form.submit "Search" %>
-<% end %>
 
+
+<div class="navdiv">
 <% @subject.each do |subject| %>
     <%= link_to(subject) do %>
         <p> <%= subject.name %> </p>
         <% end %>
 <% end %>
+</div>
 
-
+<div class="divi">
 <% @textbook.each do |textbook| %>
     <%= link_to(textbook) do %>
         <p> <%= textbook.name %> </p>
         <% end %>
+        <% if textbook.price != nil %>
+        <p>$<%= textbook.price %> </p>
+        <% else %>
+        <p>price n/a</p>
+        <% end %>
 <% end %>
-
+</div>
 
 
 </section>
