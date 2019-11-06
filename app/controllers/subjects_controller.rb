@@ -4,4 +4,8 @@ class SubjectsController < ApplicationController
 
         @textbooks = Subject.find(params[:id]).textbooks
     end
+
+    def new
+        @subject = Subject.all
+    end
 end

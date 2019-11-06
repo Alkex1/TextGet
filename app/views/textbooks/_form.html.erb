@@ -9,6 +9,12 @@
         <%= form.label :name %>
         <%= form.text_field :name %>
     </div>
+
+    <div>
+        <%= form.label :subject %>
+        <%= form.collection_select(:subject_id, Subject.all, :id, :name) %>
+    </div>
+
     <div>
         <%= form.label :author %>
         <%= form.text_field :author %>
@@ -32,13 +38,12 @@
         <%= form.number_field :retail_price %>
     </div>
     <div>
-        <%= form.label :pic %>
-        <%= form.file_field :pic, accept: "image/png,image/gif,image/jpg,image/jpeg" %>
+        <%= form.label :picture %>
+        <%= form.file_field :picture, accept: "image/png,image/gif,image/jpg,image/jpeg" %>
     </div>
+    
 
-    <div>
-    <%#= form.collection_check_boxes :subject_ids, subject, :id, :name %>
-</div>
+
     <%= form.submit (textbook.id ? "Edit Textbook Listing" : "Create Textbook Listing") %>
 
 <% end %>

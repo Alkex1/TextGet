@@ -1,5 +1,6 @@
 class TextbooksController < ApplicationController
-    before_action :authenticate_user!
+    before_action :set_user_textbook, only: [:edit, :update, :destroy]
+    before_action :authenticate_user!, only: [:show, :new, :create, :edit, :update, :destroy]
 
         
     def index
@@ -26,7 +27,7 @@ class TextbooksController < ApplicationController
 
     def create
         # allows the user to add the name, author, release date, description, price, r-price and a picture if they choose.
-        whitelisted_params = params.require(:textbook).permit(:name, :author, :release_date, :description, :price, :retail_price, :pic)
+        whitelisted_params = params.require(:textbook).permit(:name, :subject, :author, :release_date, :description, :price, :retail_price, :picture)
         @textbook = current_user.textbooks.create(textbook_params)
         # if there are any errors, goes back to the new page in view
         if @textbook.errors.any?
@@ -38,14 +39,22 @@ class TextbooksController < ApplicationController
 
     def new
         @textbook = Textbook.new
+        @subject = Subject.all
+    end
+
+    def edit
+        @textbook = Textbook.find(params[:id])
     end
 
     def update
-        if @textbook.errors.any?
-            @subject = Subject.all
-            render "new"
+        @textbook = Textbook.find(params[:id])
+
+        if @textbook.update(textbook_params)
+            redirect_to textbook_path(params[:id])
         else
-            redirect_to textbooks_path(@textbook)
+            @textbooks = Textbook.all
+            # @textbook.all
+            render "edit"
         end
 
         # @textbook = textbook.find(params[:id])
@@ -53,20 +62,30 @@ class TextbooksController < ApplicationController
         # redirect to textbook_path
     end
 
-    def edit
-        # @textbook = Texbook.find(params[:id])
-    end
+    
 
     def destroy
 
-        id = params[:id]
-        @textbook = Textbook.find(params[:id].destroy)
-        redirect_to textbook_path
+        # id = params[:id]
+        @textbook = Textbook.find(params[:id]).destroy
+        redirect_to textbooks_path
     end
 end
 
 private
 
 def textbook_params
-    params.require(:textbook).permit(:name, :author, :release_date, :description, :price, :retail_price, :pic)
+    params.require(:textbook).permit(:name, :subject, :author, :release_date, :description, :price, :retail_price, :picture)
+end
+
+def set_textbook
+
+end
+
+def set_user_textbook
+    @textbook = current_user.textbooks.find_by_id(params[:id])
+
+    if @textbook == nil
+        redirect_to textbooks_path
+    end
 end

@@ -8,8 +8,9 @@ Rails.application.routes.draw do
   get "/textbooks/:id", to: "textbooks#show", as: "textbook"
   patch "/textbooks/:id", to: "textbooks#update"
   get "/textbooks/:id/edit", to: "textbooks#edit", as: "edit_textbook"
-  delete "/textbooks/:id", to "textbooks#destroy", as: "delete_textbook"
+  delete "/textbooks/:id", to: "textbooks#destroy", as: "delete_textbook"
 
+  # subject routes
   get "/subjects/:id", to: "subjects#show", as: "subject"
-
+  
 end
