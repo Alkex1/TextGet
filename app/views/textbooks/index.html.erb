@@ -37,6 +37,11 @@
         <% else %>
         <p>price n/a</p>
         <% end %>
+        <% if textbook.picture.attached? %>
+        <%= image_tag textbook.picture %>
+        <% else %>
+        <p>no img </p>
+        <% end %>
 </div>
 
 <% end %>

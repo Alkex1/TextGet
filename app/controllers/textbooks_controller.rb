@@ -4,17 +4,13 @@ class TextbooksController < ApplicationController
 
         
     def index
+        # @txbook = Textbook.find(params[:id])
         @subject = Subject.all
         if params[:search]
             @textbook = Textbook.where("name LIKE ?", "%#{params[:search]}%")
         else
             @textbook = Textbook.all
         end    
-        # if params[:search] && !params[:search].empty?
-        #     @textbook = Textbook.where(name: params[:search])
-        # else
-        #     @textbook = Textbook.all
-        # end
     end
 
     def show
