@@ -1,8 +1,51 @@
 <h1> Homepage </h1>
 <body>
+<div class="home_top">
+<div>
 <%= render "/textbooks/nav_bar", textbook: @textbook %>
+</div>
+<div class="home_nav">
+    <%= form_with url: textbooks_path, method: "get", local: true do |form| %>
+	<%= form.label :search %>
+	<%= form.text_field :search %>
+	<%= form.submit "Search" %>
+<% end %>
+</div>
+</div>
 <section class="hero_div">
 <div class="hero">
+</div>
+</section>
+
+<section class="subjshow">
+
+<div class="homesubj">
+<h3>Common Subjects: </h3>
+
+<% @subject.each do |subject| %>
+    <%= link_to(subject) do %>
+        <p> <%= subject.name %> </p>
+        <% end %>
+<% end %>
+</div>
+<div class="homeshow">
+<% @rtextbook.each do |textbook| %>
+<div class="divi">
+    <%= link_to(textbook) do %>
+        <p> <%= textbook.name %> </p>
+        <% end %>
+        <% if textbook.price != nil %>
+        <p>$<%= textbook.price / 100.0 %> </p>
+        <% else %>
+        <p>price n/a</p>
+        <% end %>
+        <% if textbook.picture.attached? %>
+        <%= image_tag textbook.picture %>
+        <% else %>
+        <p>no img </p>
+        <% end %>
+</div>
+<% end %>
 </div>
 </section>
 </body>

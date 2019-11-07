@@ -5,9 +5,41 @@
     background-size: cover;
     background-repeat: no-repeat;
 }
+
+.home_top {
+    display: flex;
+    justify-content: space-between;
+}
+
 .hero_div {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
 }
+
+.subjshow {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+
+}
+
+.homesubj {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: min-content;
+    padding: 5px;
+    margin-left: 5px;
+}
+
+.homeshow {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin-top: 10%;
+    margin-left: 5%;
+
+}
+

@@ -19,10 +19,13 @@
 
 <div class="navdiv">
 <h3>Common Subjects: </h3>
+
 <% @subject.each do |subject| %>
+<div style="margin-right: 10px;">
     <%= link_to(subject) do %>
         <p> <%= subject.name %> </p>
         <% end %>
+</div>
 <% end %>
 </div>
 
