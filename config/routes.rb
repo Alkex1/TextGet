@@ -12,5 +12,8 @@ Rails.application.routes.draw do
 
   # subject routes
   get "/subjects/:id", to: "subjects#show", as: "subject"
+
+  get "/payments/success", to: "payments#success"
+  post "/payments/webhook", to: "payments#webhook"
   
 end

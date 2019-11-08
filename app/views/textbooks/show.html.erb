@@ -3,10 +3,10 @@
 <h1> <%= @txtname %> </h1>
 <h2> <%= @subjects[0] %> </h2>
 <%= @textbook.to_json %>
-<p> <strong>Author:</strong> <%= @textbook.author %></p>
-<p> <strong>Condition:</strong> <%= @textbook.condition %></p>
-<p><strong>Price:</strong> $<%if @textbook.price != nil %><%= @textbook.price/100.0%><% end %></p>
-<p> <strong>Retail Price:</strong> $<%if false %><%= @textbook.retail_price/100.0 %> <% end %></p>
+  <p> <strong>Author:</strong> <%= @textbook.author %></p>
+  <p> <strong>Condition:</strong> <%= @textbook.condition %></p>
+  <p><strong>Price:</strong> $<%if @textbook.price != nil %><%= @textbook.price/100.0%><% end %></p>
+  <p> <strong>Retail Price:</strong> $<%if false %><%= @textbook.retail_price/100.0 %> <% end %></p>
 
 <%= link_to "edit", edit_textbook_path(@textbook) if current_user.id == @textbook.user_id %>
 <%= link_to "delete", textbook_path(@textbook), method: :delete if current_user.id == @textbook.user_id %>
@@ -14,5 +14,22 @@
 <% if @textbook.picture.attached? %>
   <%= image_tag @textbook.picture %>
 <% end %>
+<button data-stripe="Pay now">Pay now <%= number_to_currency(@textbook.price / 100.0) %></button>
+
 </div>
+<script src="https://js.stripe.com/v3/"></script>
+
+<script>
+  document
+    .querySelector("[data-stripe='Pay now']")
+    .addEventListener("click", () => {
+      const stripe = Stripe(
+        "<%= Rails.application.credentials.dig(:stripe, :public_key) %>"
+      );
+
+      stripe.redirectToCheckout({
+        sessionId: "<%= @session_id %>"
+      });
+    });
+</script>
 </body>

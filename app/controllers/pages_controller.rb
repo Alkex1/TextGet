@@ -7,13 +7,13 @@ class PagesController < ApplicationController
         else
             @textbook = Textbook.all
         end
-        @testmethod = Textbook.all.sample
-
+        if @textbook.count > 0
         @rtextbook = []
         while @rtextbook.length < 3 do 
             
             @rtextbook.push(@textbook.sample)
             @rtextbook = @rtextbook.uniq
         end
+    end
     end
 end

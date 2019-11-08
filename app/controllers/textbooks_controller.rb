@@ -18,6 +18,28 @@ class TextbooksController < ApplicationController
         # retrieves all of the subject names for given textbook in an array.
         # @subjects = Subject.all
         @subjects = @textbook.subjects.pluck(:name)
+        
+        session = Stripe::Checkout::Session.create(
+        payment_method_types: ['card'],
+        customer_email: current_user.email,
+        line_items: [{
+            name: @textbook.name,
+            description: @textbook.description,
+            amount: @textbook.price,
+            currency: 'aud',
+            quantity: 1,
+        }],
+        payment_intent_data: {
+            metadata: {
+                user_id: current_user.id,
+                textbook_id: @textbook.id
+            }
+        },
+        success_url: "#{root_url}payments/success?userId=#{current_user.id}&textbookId=#{@textbook.id}",
+        cancel_url: "#{root_url}textbooks"
+    )
+
+    @session_id = session.id
     end
 
     def create
