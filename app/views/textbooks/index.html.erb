@@ -33,17 +33,17 @@
 <% @textbook.each do |textbook| %>
 <div class="divi">
     <%= link_to(textbook) do %>
-        <p> <%= textbook.name %> </p>
+            <p> <%= textbook.name %> </p>
         <% end %>
         <% if textbook.price != nil %>
-        <p>$<%= textbook.price / 100.0 %> </p>
+            <p>$<%= textbook.price / 100.0 %> </p>
         <% else %>
-        <p>price n/a</p>
+            <p>price n/a</p>
         <% end %>
         <% if textbook.picture.attached? %>
         <%= image_tag textbook.picture %>
         <% else %>
-        <p>no img </p>
+            <p>no img </p>
         <% end %>
 </div>
 
