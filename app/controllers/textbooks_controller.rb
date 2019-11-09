@@ -95,9 +95,9 @@ def textbook_params
     params.require(:textbook).permit(:name, :subject, :author, :release_date, :description, :price, :retail_price, :picture)
 end
 
-def set_textbook
+# def set_textbook
 
-end
+# end
 
 def set_user_textbook
     @textbook = current_user.textbooks.find_by_id(params[:id])
