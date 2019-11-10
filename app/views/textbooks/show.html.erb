@@ -2,7 +2,14 @@
 <body class="show">
 <h1> <%= @txtname %> </h1>
 <h2> <%= @subjects[0] %> </h2>
-<%= @textbook.to_json %>
+
+<div class="image_div">
+<% if @textbook.picture.attached? %>
+        <%= image_tag textbook.picture %>
+        <% else %>
+            <%= image_tag "book.png", alt: "book" %>
+        <% end %>
+</div>
   <p> <strong>Author:</strong> <%= @textbook.author %></p>
   <p> <strong>Condition:</strong> <%= @textbook.condition %></p>
   <p><strong>Price:</strong> $<%if @textbook.price != nil %><%= @textbook.price/100.0%><% end %></p>

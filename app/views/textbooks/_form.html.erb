@@ -7,7 +7,12 @@
 <%= form_with model: @textbook, local: true do |form| %>
     <div>
         <%= form.label :name %>
-        <%= form.text_field :name %>
+        <%= form.text_field :name, required: true %>
+    </div>
+
+    <div>
+        <%#= form.label :condition %>
+        <%#= form.text_field :condition, required: true %>
     </div>
 
     <div>
@@ -31,7 +36,7 @@
     </div>
     <div>
         <%= form.label :price, "Price (in cents)" %>
-        <%= form.number_field :price %>
+        <%= form.number_field :price, required: true %>
     </div>
     <div>
         <%= form.label :retail_price, "Retail Price" %>

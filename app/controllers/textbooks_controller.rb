@@ -19,12 +19,12 @@ class TextbooksController < ApplicationController
         # @subjects = Subject.all
         @subjects = @textbook.subjects.pluck(:name)
         
+        
         session = Stripe::Checkout::Session.create(
         payment_method_types: ['card'],
         customer_email: current_user.email,
         line_items: [{
             name: @textbook.name,
-            description: @textbook.description,
             amount: @textbook.price,
             currency: 'aud',
             quantity: 1,
@@ -38,9 +38,11 @@ class TextbooksController < ApplicationController
         success_url: "#{root_url}payments/success?userId=#{current_user.id}&textbookId=#{@textbook.id}",
         cancel_url: "#{root_url}textbooks"
     )
+    
 
-    @session_id = session.id
-    end
+        @session_id = session.id
+        end
+    
 
     def create
         # allows the user to add the name, author, release date, description, price, r-price and a picture if they choose.
@@ -95,9 +97,6 @@ def textbook_params
     params.require(:textbook).permit(:name, :subject, :author, :release_date, :description, :price, :retail_price, :picture)
 end
 
-# def set_textbook
-
-# end
 
 def set_user_textbook
     @textbook = current_user.textbooks.find_by_id(params[:id])

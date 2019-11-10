@@ -43,7 +43,7 @@
         <% if textbook.picture.attached? %>
         <%= image_tag textbook.picture %>
         <% else %>
-            <p>no img </p>
+            <%= image_tag "book.png", alt: "book" %>
         <% end %>
 </div>
 

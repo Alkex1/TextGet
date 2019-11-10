@@ -1,0 +1,13 @@
+<%= render "/textbooks/nav_bar", textbook: @textbook %>
+<h1 style="text-align:center;"> <%= @current_user.email %>'s Profile </h1>
+
+<% @textbooks.each do |textbook| %>
+    <%= link_to(textbook) do %>
+        <h2> <%= textbook.name %> </h2>
+        <% if textbook.price != nil %>
+            <p>$<%= textbook.price / 100.0 %> </p>
+        <% else %>
+            <p>price n/a</p>
+        <% end %>
+        <% end %>
+<% end %>
