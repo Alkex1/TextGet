@@ -46,7 +46,7 @@ class TextbooksController < ApplicationController
 
     def create
         # allows the user to add the name, author, release date, description, price, r-price and a picture if they choose.
-        whitelisted_params = params.require(:textbook).permit(:name, :subject, :author, :release_date, :description, :price, :retail_price, :picture)
+        whitelisted_params = params.require(:textbook).permit(:name, :condition, :subject, :author, :release_date, :description, :price, :retail_price, :picture)
         @textbook = current_user.textbooks.create(textbook_params)
         # if there are any errors, goes back to the new page in view
         if @textbook.errors.any?
@@ -94,7 +94,7 @@ end
 private
 
 def textbook_params
-    params.require(:textbook).permit(:name, :subject, :author, :release_date, :description, :price, :retail_price, :picture)
+    params.require(:textbook).permit(:name, :condition, :subject, :author, :release_date, :description, :price, :retail_price, :picture)
 end
 
 

@@ -11,8 +11,8 @@
     </div>
 
     <div>
-        <%#= form.label :condition %>
-        <%#= form.text_field :condition, required: true %>
+        <%= form.label :condition %>
+        <%= form.select(:condition, ["Like New", "Good", "Poor quality"]) %>
     </div>
 
     <div>
