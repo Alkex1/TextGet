@@ -1,11 +1,17 @@
 <%= render "nav_bar", textbook: @textbook %>
 <body class="show">
 <h1> <%= @txtname %> </h1>
+<% if @subjects != nil %>
 <h2> <%= @subjects[0] %> </h2>
+<% else %>
+<h2><%= @subject %>  </h2>
+<% end %>
+
+
 
 <div class="image_div">
 <% if @textbook.picture.attached? %>
-        <%= image_tag textbook.picture %>
+        <%= image_tag @textbook.picture %>
         <% else %>
             <%= image_tag "book.png", alt: "book" %>
         <% end %>
@@ -15,12 +21,15 @@
   <p><strong>Price:</strong> $<%if @textbook.price != nil %><%= @textbook.price/100.0%><% end %></p>
   <p> <strong>Retail Price:</strong> $<%if false %><%= @textbook.retail_price/100.0 %> <% end %></p>
 
-<%= link_to "edit", edit_textbook_path(@textbook) if current_user.id == @textbook.user_id %>
-<%= link_to "delete", textbook_path(@textbook), method: :delete if current_user.id == @textbook.user_id %>
-<div class="image_div">
-<% if @textbook.picture.attached? %>
-  <%= image_tag @textbook.picture %>
+<%# only show edit/delete buttons if current user is owner of textbook %>
+<% if current_user.id == @textbook.user_id %>
+<button><%= link_to "edit", edit_textbook_path(@textbook)  %></button>
+<button><%= link_to "delete", textbook_path(@textbook), method: :delete %></button>
 <% end %>
+<div class="image_div">
+
+<%# only show buy button if current user is not the owner of the textbook %>
+<% if current_user.id != @textbook.user_id %>
 <button data-stripe="Pay now">Pay now <%= number_to_currency(@textbook.price / 100.0) %></button>
 
 </div>
@@ -39,4 +48,5 @@
       });
     });
 </script>
+<% end %>
 </body>

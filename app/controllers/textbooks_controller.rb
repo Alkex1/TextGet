@@ -15,8 +15,7 @@ class TextbooksController < ApplicationController
     def show
         @textbook = Textbook.find(params[:id])
         @txtname = @textbook.name
-        # retrieves all of the subject names for given textbook in an array.
-        # @subjects = Subject.all
+        # retrieves all of the subject names for given textbook in an array.       
         @subjects = @textbook.subjects.pluck(:name)
         
         
@@ -46,12 +45,15 @@ class TextbooksController < ApplicationController
 
     def create
         # allows the user to add the name, author, release date, description, price, r-price and a picture if they choose.
-        whitelisted_params = params.require(:textbook).permit(:name, :condition, :subject, :author, :release_date, :description, :price, :retail_price, :picture)
+        whitelisted_params = textbook_params
         @textbook = current_user.textbooks.create(textbook_params)
+        # @textbooks_subject = current_user.textbooks_subject.create(tbooksub)
         # if there are any errors, goes back to the new page in view
         if @textbook.errors.any?
+            
             render "new"
         else
+            
             redirect_to textbooks_path(@textbook)
         end
     end
@@ -75,10 +77,6 @@ class TextbooksController < ApplicationController
             # @textbook.all
             render "edit"
         end
-
-        # @textbook = textbook.find(params[:id])
-        # @textbook.update(textbook: params[name of table][:name of thing to be changed])
-        # redirect to textbook_path
     end
 
     
@@ -96,6 +94,11 @@ private
 def textbook_params
     params.require(:textbook).permit(:name, :condition, :subject, :author, :release_date, :description, :price, :retail_price, :picture)
 end
+
+# couldn't pass subject through to the model, tried to run another method to take the subject id from the new textbook form.
+# def tbooksub
+#     params.require(:textbooks_subject).permit(:subject_id)
+# end
 
 
 def set_user_textbook
